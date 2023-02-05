@@ -6,7 +6,7 @@
 /*   By: kfouad < kfouad@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:05:54 by kfouad            #+#    #+#             */
-/*   Updated: 2023/02/04 20:04:57 by kfouad           ###   ########.fr       */
+/*   Updated: 2023/02/05 13:44:27 by kfouad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 
-char	ft_byte_to_char(char *byte);
+unsigned char	ft_byte_to_char(char *byte);
 void	handler(int sig, siginfo_t *info, void *p);
 int		ft_atoi(char *str);
 int		check_printf(char s, va_list arg);
