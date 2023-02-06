@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfouad < kfouad@student.1337.ma>           +#+  +:+       +#+        */
+/*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:46:21 by kfouad            #+#    #+#             */
-/*   Updated: 2023/02/05 15:46:07 by kfouad           ###   ########.fr       */
+/*   Updated: 2023/02/06 15:35:58 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	main(void)
 	struct sigaction	sa;
 
 	pid = getpid();
-	ft_printf("PID : %d", pid);
+	ft_printf("PID : %d\n", pid);
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler;
 	sigaction(SIGUSR1, &sa, 0);

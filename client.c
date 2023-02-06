@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfouad < kfouad@student.1337.ma>           +#+  +:+       +#+        */
+/*   By: khalid <khalid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:55:32 by kfouad            #+#    #+#             */
-/*   Updated: 2023/02/05 15:44:11 by kfouad           ###   ########.fr       */
+/*   Updated: 2023/02/06 15:34:20 by khalid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+void send_sig(int count, int c, int pid)
+{
+	while (count < 8)
+	{
+		if (c % 2 == 1)
+			kill(pid, SIGUSR2);
+		else
+			kill(pid, SIGUSR1);
+		usleep(100);
+		c = c / 2;
+		count++;
+	}
+}
+
 
 int	main(int argc, char *argv[])
 {
@@ -31,16 +46,17 @@ int	main(int argc, char *argv[])
 	{
 		c = argv[2][i];
 		count = 0;
-		while (count < 8)
-		{
-			if (c % 2 == 1)
-				kill(pid, SIGUSR2);
-			if (c % 2 == 0)
-				kill(pid, SIGUSR1);
-			usleep(100);
-			c = c / 2;
-			count++;
-		}
+		send_sig(count,c,pid);
+		// while (count < 8)
+		// {
+		// 	if (c % 2 == 1)
+		// 		kill(pid, SIGUSR2);
+		// 	if (c % 2 == 0)
+		// 		kill(pid, SIGUSR1);
+		// 	usleep(100);
+		// 	c = c / 2;
+		// 	count++;
+		// }
 		i++;
 	}
 	return (0);
