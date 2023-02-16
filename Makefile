@@ -1,36 +1,36 @@
-SRCSS = server.c src/ft_printf.c src/ft_putchar.c src/ft_putnbr.c src/ft_putstr.c
+SRCS = src/ft_printf.c src/ft_putchar.c src/ft_putnbr.c src/ft_putstr.c src/ft_atoi.c
+OBJS = $(SRCS:.c=.o)
+NAME = client server
+CLIENT_SRC = client.c
+SERVER_SRC = server.c
+CLIENT_OBJ = client.o
+SERVER_OBJ = server.o
 
-SRCSC = client.c src/ft_atoi.c src/ft_printf.c src/ft_putchar.c src/ft_putnbr.c src/ft_putstr.c
-
-OBGS = ${SRCSS:.c=.o}
-
-OBGC = ${SRCSC:.c=.o}
-
-NAME = server client
-
-CC = gcc
-
+CC = cc
 AR = ar -rc
-
 CFLAGS = -Wall -Wextra -Werror
-
 RM = rm -rf
 
-%.o : %.c
-		${CC} ${CFLAGS} -c $< -o $@
+src/%.o : %.c
+		$(CC) $(CFLAGS) -c $< -o $@
 
-${NAME} : ${OBGS} ${OBGC}
-		${CC}  ${OBGS} -o server
-		${CC}  ${OBGC} -o client
+all : $(NAME)
 
-all : ${NAME}
+$(SERVER_OBJ) : $(SERVER_SRC)
+	$(CC) $(CFLAGS) -c $^ -o $@
+
+$(CLIENT_OBJ) : $(CLIENT_SRC)
+	$(CC) $(CFLAGS) -c $^ -o $@
+
+$(NAME) : $(OBJS) $(SERVER_OBJ) $(CLIENT_OBJ)
+	$(CC) $(CFLAGS) $(SERVER_OBJ) $(OBJS) -o server
+	$(CC) $(CFLAGS) $(CLIENT_OBJ) $(OBJS) -o client
 
 clean :
-		${RM} ${OBGS}
-		${RM} ${OBGC}
+		$(RM) $(OBJS) $(CLIENT_OBJ) $(SERVER_OBJ)
 
 fclean : clean
-		${RM} ${NAME}
+	$(RM) $(NAME)
 
 re : fclean all
 
