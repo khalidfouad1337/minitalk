@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfouad <kfouad@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 20:46:21 by kfouad            #+#    #+#             */
-/*   Updated: 2023/03/13 16:56:44 by kfouad           ###   ########.fr       */
+/*   Created: 2023/03/11 19:37:12 by kfouad            #+#    #+#             */
+/*   Updated: 2023/03/13 17:27:04 by kfouad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	handler(int sig, siginfo_t *info, void *p)
 		byte[nbr_bit] = '0';
 	else
 		byte[nbr_bit] = '1';
-	nbr_bit++;
-	if (nbr_bit == 8)
+	if (++nbr_bit == 8)
 	{
 		c = ft_byte_to_char(byte);
 		ft_putchar (c);
 		nbr_bit = 0;
 	}
+	kill(info->si_pid, SIGUSR1);
 }
 
 int	main(void)
@@ -93,8 +93,6 @@ int	main(void)
 	sigaction(SIGUSR1, &sa, 0);
 	sigaction(SIGUSR2, &sa, 0);
 	while (1)
-	{
 		pause();
-	}
 	return (0);
 }
